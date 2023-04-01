@@ -115,12 +115,9 @@ const [saveProperty] = useSavePropertyMutation()
 const {data: saveproperty} = useGetSavePropertyQuery(id)
 {/* @ts-ignore:next-line */}
 const saveId = saveproperty?.data?._id
-
-console.log(propertyType, paymentType, bedroom, bathroom, minprice, maxprice, minSize, maxSize, toggle, propertyGroup)
 //const { data } = useGetPropertiesQuery();
 
 const { data } = useNativeSearchPropertiesQuery({search, propertyType, paymentType, bedroom, bathroom, minprice, maxprice, minSize, maxSize, toggle, propertyGroup, sort });
-console.log(data);
 
 useEffect (() => {
 dispatch(setProperties({property: data}))
