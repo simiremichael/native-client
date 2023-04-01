@@ -24,7 +24,7 @@ export const propertyAPI = createApi({
   // }),
   
 
-refetchOnFocus: true,
+// refetchOnFocus: true,
 tagTypes: ['Properties', 'Users'],
   endpoints: (builder) => ({
      getUsers: builder.query<UserModel[], void>({
@@ -132,100 +132,22 @@ tagTypes: ['Properties', 'Users'],
                 query: (id) => `/properties/${id}`,
                 providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
               }),
-              getPropertiesByAgent: builder.query<PropertyModel, any>({
-                query: (agentId) => `/properties/agentProperties/${agentId}`,
-                providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
-              }),
-              searchProperties: builder.query<PropertyModel, any>({
-                query: ({search, toggle, minPrice, maxPrice, type, page, selectBed, selectBath,duration})  => `/properties/search?search=${search || 'i'}&toggle=${toggle || 'rent'}&type=${type || 'apartment'}&duration=${duration || 'yearly'}&selectBath=${selectBath || '4'}&selectBed=${selectBed || '4'}&minPrice=${minPrice || '200000'}&maxPrice=${maxPrice || '4000000'}&page=${page}`,
-                providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
-                //search, toggle, minPrice, maxPrice, type, selectBed, selectBath,duration
-              }),
               nativeSearchProperties: builder.query<PropertyModel, any>({
-                query: ({search, propertyType, paymentType, bedroom, bathroom, minprice, maxprice, minSize, maxSize, toggle, propertyGroup, sort})  => `/properties/nativesearch?search=${search || 'i'}&propertyType=${propertyType || 'apartment'}&paymentType=${paymentType || 'yearly'}&bedroom=${bedroom || '4'}&bathroom=${bathroom || '4'}&minprice=${minprice || '200000'}&maxprice=${maxprice || '4000000'}&minSize=${minSize || '400'}&maxSize=${maxSize || '8000'}&toggle=${toggle || 'rent'}&propertyGroup=${propertyGroup || 'Residential'}&sort=${sort || 'Featured'}`,
+                query: ({search, propertyType, paymentType, bedroom, bathroom, minprice, maxprice, minSize, maxSize, toggle, propertyGroup, sort})  => `/properties/nativesearch?search=${search || 'i'}&propertyType=${propertyType || 'apartment'}&paymentType=${paymentType || 'yearly'}&bedroom=${bedroom || '4'}&bathroom=${bathroom || '4'}&minprice=${minprice || '200000'}&maxprice=${maxprice || '4000000'}&minSize=${minSize || '400'}&maxSize=${maxSize || '8000'}&toggle=${toggle || 'rent'}&propertyGroup=${propertyGroup || 'Residential'}&sort=${sort}`,
                 providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
                 //search, toggle, minPrice, maxPrice, type, selectBed, selectBath,duration
               }),
-              searchPropertiesByBuy: builder.query<PropertyModel, any>({
-                query: ({searchQuery, search, category, sort, bed,bath, minPrice, maxPrice, type, page})  => `/properties/buy?search=${search || 'i'}&category=${category || 'sale'}&type=${type || 'apartment'}&sort=${sort}&bath=${bath || '4'}&bed=${bed || '4'}&minPrice=${minPrice || '2000000'}&maxPrice=${maxPrice || '500000000'}&page=${page}`,
-                //transformResponse: (response: any) => response.reverse(),
-                providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
-                //search, category, sort, bed, bath, minPrice, maxPrice, type, page
-              }),
+             
               getSaveProperty: builder.query<PropertyModel, any>({
                 query: (id)  => `/properties/saveproperties?id=${id}`,
                 //transformResponse: (response: any) => response.reverse(),
                 providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
               }),
-              searchPropertiesByRent: builder.query<PropertyModel, any>({
-                query: ({searchQuery, search, category, sort, bed,bath, minPrice, maxPrice, type, page})  => `/properties/rent?search=${search || 'i'}&category=${category || 'rent'}&type=${type || 'apartment'}&sort=${sort}&bath=${bath || '4'}&bed=${bed || '4'}&minPrice=${minPrice || '2000000'}&maxPrice=${maxPrice || '500000000'}&page=${page}`,
-               // transformResponse: (response: any) => response.sort((a: any, b: any) => b - a),
-                providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
-                //search, category, sort, bed, bath, minPrice, maxPrice, type, page
-              }),
               moreProperty: builder.query<PropertyModel, any>({
                 query: ({location, price, propertyType, bedroom, category})  => `/properties/more?location=${location}&price=${price}&propertyType=${propertyType}&bedroom=${bedroom}&category=${category}`,
                 transformResponse: (response: any) => response.sort((a: any, b: any) => b - a),
                 providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
-              }),
-              commercial: builder.query<PropertyModel, any>({
-                query: ({searchQuery, search, category, propertyGroup, sort, bed,bath, minPrice, maxPrice, type, page})  => `/properties/commercial?search=${search || 'i'}&propertyGroup=${propertyGroup}&category=${category || 'sale'}&type=${type || 'office'}&sort=${sort}&bath=${bath || '1'}&bed=${bed || '1'}&minPrice=${minPrice || '200000'}&maxPrice=${maxPrice || '500000000'}&page=${page}`,
-               // transformResponse: (response: any) => response.sort((a: any, b: any) => b - a),
-                providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
-                //search, category, sort, bed, bath, minPrice, maxPrice, type, page
-              }),
-              newProject: builder.query<PropertyModel, any>({
-                query: ({ search, sort, possession, minBed, maxBed, minPrice, maxPrice, type, propertyGroup, page})  => `/properties/newProject?search=${search || 'i'}&type=${type || 'apartment'}&sort=${sort}&minBed=${minBed || '1'}&maxBed=${maxBed || '4'}&minPrice=${minPrice || '200000'}&maxPrice=${maxPrice || '500000000'}&page=${page}&possession=${possession || 2022 }&propertyGroup=${propertyGroup}`,
-                //transformResponse: (response: any) => response.reverse(),
-                providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
-              }),
-              offplan: builder.query<PropertyModel, any>({
-                query: ({search, sort, minBed, maxBed, minPrice, possession, maxPrice, type, propertyGroup, page})  => `/properties/offplan?search=${search || 'i'}&type=${type || 'semi detached'}&sort=${sort}&minBed=${minBed || '1'}&maxBed=${maxBed || '4'}&minPrice=${minPrice || '200000'}&maxPrice=${maxPrice || '500000000'}&page=${page}&possession=${possession || 2022}&propertyGroup=${propertyGroup}`,
-                //transformResponse: (response: any) => response.reverse(),
-                providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
-              }),
-                 addProperty: builder.mutation<PropertyModel, Partial<PropertyModel>>({
-                  query(body) {
-                    return {
-                    url: '/properties',
-                    method: 'POST',
-                    body,
-                  }
-                   },
-                    invalidatesTags: [{type: 'Properties', id: 'PROP'}],
-                 }),
-                 updateProperty: builder.mutation<PropertyModel, Partial<PropertyModel> & Pick<PropertyModel, 'id'>>({
-                  query: ({id, ...patch}) => ({
-                    url: `/properties/${id}`,
-                    method: 'PATCH',
-                    body: patch,  
-                     }),
-                     transformResponse: (response: { data: PropertyModel }, meta, arg) => response.data,
-                     transformErrorResponse: (
-                      response: { status: string | number },
-                      meta,
-                      arg
-                    ) => response.status,
-                    invalidatesTags:  (result, error, {id}) => [{ type: 'Properties', id: 'PROP'  }],
-                    async onQueryStarted(
-                      arg,
-                      { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }
-                    ) {},
-                 }),
-          
-                 deleteProperty: builder.mutation<{ success: boolean; id: number | string }, number | string>({
-                  query(id) {
-                    return {
-                      url: `properties/${id}`,
-                      method: 'DELETE',
-                    }
-                  },
-                 invalidatesTags: (result, error, id) => [{ type: 'Properties', id: 'PROP' }],
-                   }),
-                   companyPropertySearch: builder.query<PropertyModel, any>({
-                    query: ({companyId, searchQuery, page, search})  => `/properties/adminHomepage/propertyList/${companyId}?searchQuery=${searchQuery || 'i'}&page=${page}`,
-                    providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
-                  }),   
+              }), 
                   saveProperty: builder.mutation<PropertyModel, Partial<PropertyModel> & Pick<PropertyModel, 'id'>>({
                     // query(id) {
                     //   return {
@@ -266,18 +188,7 @@ export const {
     useDeleteUserMutation,
     useGetPropertiesQuery,
     useGetPropertyQuery,
-    useCommercialQuery,
-    useNewProjectQuery,
-    useOffplanQuery,
     useMorePropertyQuery, 
-    useAddPropertyMutation, 
-    useUpdatePropertyMutation,
-    useDeletePropertyMutation,
-    useGetPropertiesByAgentQuery,
-    useSearchPropertiesByBuyQuery,
-    useSearchPropertiesByRentQuery,
-    useCompanyPropertySearchQuery,
-    useSearchPropertiesQuery,
     useNativeSearchPropertiesQuery,
     useGoogleSignInMutation,
     useSavePropertyMutation,
