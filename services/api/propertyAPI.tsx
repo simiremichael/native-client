@@ -137,7 +137,10 @@ tagTypes: ['Properties', 'Users'],
                 providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
                 //search, toggle, minPrice, maxPrice, type, selectBed, selectBath,duration
               }),
-             
+              getPropertiesByAgent: builder.query<PropertyModel, any>({
+                query: ({agentId, page}) => `/properties/agentProperties/${agentId}?page=${page}`,
+                providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
+              }),
               getSaveProperty: builder.query<PropertyModel, any>({
                 query: (id)  => `/properties/saveproperties?id=${id}`,
                 //transformResponse: (response: any) => response.reverse(),
@@ -188,6 +191,7 @@ export const {
     useDeleteUserMutation,
     useGetPropertiesQuery,
     useGetPropertyQuery,
+    useGetPropertiesByAgentQuery,
     useMorePropertyQuery, 
     useNativeSearchPropertiesQuery,
     useGoogleSignInMutation,
