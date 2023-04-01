@@ -138,7 +138,7 @@ tagTypes: ['Properties', 'Users'],
                 //search, toggle, minPrice, maxPrice, type, selectBed, selectBath,duration
               }),
               getPropertiesByAgent: builder.query<PropertyModel, any>({
-                query: ({agentId, page}) => `/properties/agentProperties/${agentId}?page=${page}`,
+                query: (agentId) => `/properties/agentProperties/${agentId}`,
                 providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
               }),
               getSaveProperty: builder.query<PropertyModel, any>({

@@ -25,7 +25,7 @@ export default function PropertyDetailsScreen({route}: any) {
   const { propertyDetail } = useAppSelector(selectCurrentPropertyDetail)
   const agentId = propertyDetail?.creator
   const {data: getNumOfProperties} = useGetPropertiesByAgentQuery(agentId);
-  console.log(propertyDetail)
+
   const longitude = propertyDetail?.longitude
   const latitude = propertyDetail?.latitude
 
