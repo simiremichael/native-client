@@ -57,23 +57,23 @@ const [filterLowPrice, setFilterLowPrice] = useState('')
    }
 
  const handleFeatured = () => {
-  setFeatured('Featured');
+  setFeatured('featured');
   setNewest('');
   setMaxPrice('');
   setMinPrice('');
   setFilter1('');
     setFilter('');
-    setSort('Featured')
+    setSort('featured')
   onClose()
  };
  const handleNewest = () => {
   setFeatured('');
-  setNewest('New');
+  setNewest('new');
   setMaxPrice('');
   setMinPrice('');
   setMinPrice('');
   setFilter1('');
-  setSort('New')
+  setSort('new')
   onClose()
  };
  const handleMinPrice = () => {
@@ -89,11 +89,11 @@ const [filterLowPrice, setFilterLowPrice] = useState('')
  const handleMaxPrice = () => {
   setFeatured('');
   setNewest('');
-  setMaxPrice('MaxPrice');
+  setMaxPrice('maxPrice');
   setMinPrice('');
   setMinPrice('');
   setFilter1('');
-  setSort('mazPrice')
+  setSort('maxPrice')
   onClose()
  }
  
@@ -104,7 +104,7 @@ const navigation = useNavigation();
 const dispatch = useAppDispatch();
 
 const {user} = useAppSelector(selectCurrentUser);
-
+{/* @ts-ignore:next-line */}
 const id = user?.result?._id
 console.log(id);
 
@@ -113,6 +113,7 @@ const { propertyType, paymentType, bedroom, bathroom, minprice, maxprice, minSiz
 const [saveProperty] = useSavePropertyMutation()
 
 const {data: saveproperty} = useGetSavePropertyQuery(id)
+{/* @ts-ignore:next-line */}
 const saveId = saveproperty?.data?._id
 
 console.log(saveproperty)
@@ -126,7 +127,7 @@ dispatch(setProperties({property: data}))
 },[dispatch, data])
 
 const { property} = useAppSelector(selectCurrentProperty);
-
+{/* @ts-ignore:next-line */}
  property?.data?.filter(i => i >= 5000 )
 //const fiilterLowPrice = property?.data?.filter(i => i >= 5000 );
 

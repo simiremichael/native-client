@@ -142,7 +142,7 @@ tagTypes: ['Properties', 'Users'],
                 //search, toggle, minPrice, maxPrice, type, selectBed, selectBath,duration
               }),
               nativeSearchProperties: builder.query<PropertyModel, any>({
-                query: ({search, propertyType, paymentType, bedroom, bathroom, minprice, maxprice, minSize, maxSize, toggle, propertyGroup, sort})  => `/properties/nativesearch?search=${search || 'i'}&propertyType=${propertyType || 'apartment'}&paymentType=${paymentType || 'yearly'}&bedroom=${bedroom || '4'}&bathroom=${bathroom || '4'}&minprice=${minprice || '200000'}&maxprice=${maxprice || '4000000'}&minSize=${minSize || '400'}&maxSize=${maxSize || '8000'}&toggle=${toggle || 'rent'}&propertyGroup=${propertyGroup || 'Residential'}&sort=${sort || "_id: -1"}`,
+                query: ({search, propertyType, paymentType, bedroom, bathroom, minprice, maxprice, minSize, maxSize, toggle, propertyGroup, sort})  => `/properties/nativesearch?search=${search || 'i'}&propertyType=${propertyType || 'apartment'}&paymentType=${paymentType || 'yearly'}&bedroom=${bedroom || '4'}&bathroom=${bathroom || '4'}&minprice=${minprice || '200000'}&maxprice=${maxprice || '4000000'}&minSize=${minSize || '400'}&maxSize=${maxSize || '8000'}&toggle=${toggle || 'rent'}&propertyGroup=${propertyGroup || 'Residential'}&sort=${sort || 'Featured'}`,
                 providesTags: (result, error, id: any) =>  [{ type:'Properties', id: 'PROP' }],  
                 //search, toggle, minPrice, maxPrice, type, selectBed, selectBath,duration
               }),
