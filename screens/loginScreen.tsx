@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { useNavigation } from '@react-navigation/core';
 import * as ImagePicker from 'expo-image-picker';
 
-export default function LoginScreen() {
+export default function LoginScreen(this: any) {
 
      const [image, setImage] = useState('');
     const [ isRegistered, setIsRegistered] = useState(false);
@@ -268,6 +268,13 @@ console.log(image, data)
               Sign In
             </Text>
             </Pressable>
+            {/* <GoogleSigninButton
+  style={{ width: 192, height: 48 }}
+  size={GoogleSigninButton.Size.Wide}
+  color={GoogleSigninButton.Color.Dark}
+  onPress={this._signIn}
+  disabled={this.state.isSigninInProgress}
+/> */}
           </HStack>
         </VStack>
       </Box>
